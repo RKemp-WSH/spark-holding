@@ -1,0 +1,38 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "allowJs": true,
+    "jsx": "preserve",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./ts",
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "vitest/globals",
+      "vite/client",
+      "node"
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+      "ts/**/*",
+      "ts/**/*.vue",
+      "ts/shims-vue.d.ts",
+      "types/**/*"
+  ],
+  "exclude": [
+      "node_modules",
+      "dist"
+  ]
+}
