@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from "vue"; // Import computed
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import lottie, { type AnimationItem } from "lottie-web";
 import { cn } from "@/ts/utilities";
 
@@ -16,49 +16,61 @@ const props = withDefaults(
   },
 );
 
-const container = ref<HTMLDivElement>();
+const container = ref<HTMLDivElement | null>(null);
 const animation = ref<AnimationItem>();
 
 onMounted(() => {
   if (container.value) {
     animation.value = lottie.loadAnimation({
-      container: container.value, // the dom element that will contain the animation
+      container: container.value,
       renderer: "svg",
       loop: true,
       autoplay: true,
-      path: "/spinner.json", // the path to the animation json
+      path: "/spinner.json", // Ensure this path is correct
       rendererSettings: {
-        className: props.spinnerClass, // CSS class assigned to the animation
+        className: props.spinnerClass,
       },
     });
 
-    // Set the size of the animation
-    animation.value.setSpeed(props.size === "small" ? 0.5 : 1);
-    animation.value.setSpeed(props.size === "medium" ? 0.75 : 1);
-    animation.value.setSpeed(props.size === "large" ? 1 : 1);
+    // Set animation speed based on size
+    if (animation.value) {
+      switch (props.size) {
+        case "small":
+          animation.value.setSpeed(0.5);
+          break;
+        case "medium":
+          animation.value.setSpeed(0.75);
+          break;
+        case "large":
+          animation.value.setSpeed(1);
+          break;
+      }
+    }
   }
 });
 
 onBeforeUnmount(() => {
-  if (animation.value) {
-    animation.value.destroy();
-  }
+  animation.value?.destroy();
 });
 
 const containerClasses = computed(() => {
-  return cn(
-    "flex w-full justify-center",
-    props.containerClass,
-    props.size === "small" ? "h-5 w-5" : "",
-    props.size === "medium" ? "h-7 w-7" : "",
-    props.size === "large" ? "h-9 w-9" : "",
-  );
+  let sizeClass = "";
+  switch (props.size) {
+    case "small":
+      sizeClass = "h-5 w-5";
+      break;
+    case "medium":
+      sizeClass = "h-7 w-7";
+      break;
+    case "large":
+      sizeClass = "h-9 w-9";
+      break;
+  }
+
+  return cn("flex w-full justify-center", props.containerClass, sizeClass);
 });
 </script>
 
 <template>
-  <div
-    ref="container"
-    :class="containerClasses"
-  />
+  <div ref="container" :class="containerClasses" />
 </template>

@@ -15,13 +15,11 @@ const props = withDefaults(
   defineProps<
     CheckboxRootProps & {
       variant?: "default" | "formModuleLight" | "formModuleDark";
-      mode?: "light" | "dark";
       class?: HTMLAttributes["class"];
     }
   >(),
   {
     variant: "default",
-    mode: "light",
     class: "",
   },
 );
@@ -45,6 +43,11 @@ const classes = {
     formModuleDark:
       "flex h-full w-full items-center justify-center text-current",
   },
+  checkClass: {
+    default: "h-7 w-7",
+    formModuleLight: "h-4 w-4",
+    formModuleDark: "h-4 w-4",
+  }
 };
 
 const variantClass = computed(() => {
@@ -53,6 +56,10 @@ const variantClass = computed(() => {
 
 const indicatorClass = computed(() => {
   return classes.checkboxIndicatorClass[props.variant];
+});
+
+const checkClass = computed(() => {
+  return classes.checkClass[props.variant];
 });
 </script>
 
@@ -63,7 +70,7 @@ const indicatorClass = computed(() => {
   >
     <CheckboxIndicator :class="indicatorClass">
       <slot>
-        <Check class="h-7 w-7" />
+        <Check :class="checkClass" />
       </slot>
     </CheckboxIndicator>
   </CheckboxRoot>

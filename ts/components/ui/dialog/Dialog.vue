@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DialogRoot, type DialogRootEmits, type DialogRootProps, useForwardPropsEmits } from "radix-vue";
+import { DialogRoot, type DialogRootEmits, type DialogRootProps } from "radix-vue";
 import { ref, watch, onMounted } from 'vue';
 
 const props = withDefaults(defineProps<DialogRootProps & {
@@ -11,10 +11,8 @@ const props = withDefaults(defineProps<DialogRootProps & {
 });
 
 const emits = defineEmits<DialogRootEmits & {
-  'update:open': [value: boolean];
+  'update:open': [value: boolean]
 }>();
-
-const forwarded = useForwardPropsEmits(props, emits);
 
 const isOpen = ref<boolean>(props.defaultOpen);
 
@@ -36,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <DialogRoot v-bind="{ ...forwarded, open: isOpen }" @update:open="(value) => emits('update:open', value)">
+  <DialogRoot :open="isOpen" @update:open="isOpen = $event">
     <slot />
   </DialogRoot>
 </template>

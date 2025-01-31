@@ -16,7 +16,7 @@
   "publishConfig": {
     "@westshorehome:registry": "https://npm.pkg.github.com"
   },
-"scripts": {
+  "scripts": {
     "build:css": "tailwindcss -i ./css/index.css -o ./dist/css/spark.css",
     "watch:css": "tailwindcss -i ./css/index.css -o ./dist/css/spark.css --watch",
     "build:ts": "npx vue-tsc --build --force",
@@ -25,7 +25,7 @@
     "build": "npm run build:vite && npm run build:ts && npm run build:css",
     "test": "vitest",
     "test:watch": "vitest --watch"
-},
+  },
   "keywords": [
     "vue",
     "vuejs",
@@ -50,6 +50,7 @@
   "devDependencies": {
     "@babel/types": "^7.25.6",
     "@types/node": "^20.12.6",
+    "@types/prismjs": "^1.26.5",
     "@types/three": "^0.172.0",
     "@vimeo/player": "^2.25.1",
     "@vitejs/plugin-vue": "^5.2.1",
@@ -60,7 +61,9 @@
     "embla-carousel-vue": "^8.5.2",
     "jsdom": "^24.0.0",
     "lottie-web": "^5.12.2",
+    "lucide-vue-next": "^0.474.0",
     "postcss": "^8.4.38",
+    "prismjs": "^1.29.0",
     "sass-embedded": "^1.77.2",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",

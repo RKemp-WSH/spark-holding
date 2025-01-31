@@ -1,3 +1,4 @@
+// vite.config.ts
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
@@ -8,9 +9,9 @@ export default defineConfig({
     emptyOutDir: true, // Clean the dist directory before each build
     lib: {
       entry: path.resolve(__dirname, 'ts/index.ts'),
-      name: 'Spark', // Changed from "SparkToolbox" to "Spark"
+      name: 'Spark', // Set the global variable name for your library
       formats: ["es", "umd"], // Specify the formats you want to generate
-      fileName: (format) => `spark.${format}.js`, // Changed file name format to match new name
+      fileName: (format) => `spark.${format}.js`, // Use the correct name here
     },
     rollupOptions: {
       // Externalize peer dependencies
@@ -28,7 +29,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./"), // Alias for the project root
+      "@": path.resolve(__dirname, "./"),
     },
   },
 });
